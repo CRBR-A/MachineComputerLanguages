@@ -1,0 +1,1164 @@
+# JavaScript reference for non-JavaScript programmers
+
+Author: Yotam Gingold  
+License: Public Domain ([CC0](http://creativecommons.org/publicdomain/zero/1.0/))
+
+This document is intended as a reference or introduction to JavaScript
+for someone familiar with a language like C/C++/Java or Python.
+It follows best practices and gathers the scattered wisdom from matny
+stackoverflow questions and in-depth JavaScript essays.
+It relies on no external libraries.
+The JavaScript described in this document should work in any recent version of Chrome, Safari, Firefox, or IE.
+
+This is a guide to the JavaScript language only and does not discuss the HTML DOM.
+The important thing to know about JavaScript with respect to HTML is that `<script>` tags
+are executed synchronously in the order they appear, and that global variables are shared across `<script>` tags.
+
+Note: ECMAScript 6 (aka ECMAScript 2015) is now widely supported. You should use its modern conveniences: [ECMAScript 6 - New Features](http://es6-features.org/).
+
+## <a name="types"></a>Basic types
+
+JavaScript has numbers (integer and floating point), [strings](#strings) (you can use single or double quotes), booleans (`true` and `false`), [arrays](#arrays) (`[1,2,3]`), and [dictionaries](#dictionaries) (`{ cat: , dog: 'kibble', elephant: [1,2,3] }`).
+
+JavaScript is a dynamic language. You declare a variable without specifying its type:
+
+        let myvar1 = 5;
+        let myvar2 = 5.4;
+        let myvar3 = 'cat';
+        let myvar4 = "dog";
+        let myvar5 = true;
+        let myvar6 = [ 1,2,3 ];
+        let myvar7 = { cat: 1, dog: 'kibble', elephant: [ 1,2,3 ] };
+        let myvar8;
+
+If you haven't defined a variable, as in `myvar8`, it has the special value `undefined`.
+
+If you never expect to re-assign the variable, use `const`. The interpreter will help you by catching that mistake.
+
+If you are targeting old JavaScript (prior to ECMAScript 6), you must use `var` instead of `let`. It has more surprising [scoping rules](http://es6-features.org/#BlockScopedVariables).
+
+
+## <a name="casting"></a>Casting
+
+JavaScript automatically converts types, and the conversion rules can be [bewildering](http://stackoverflow.com/a/359509/328840).
+This can lead to difficult-to-debug situations. For example, `+` means addition for numbers but concatenation for strings:
+
+        (2 + "3") - 1
+        => 22 (as a number, not as a string)
+        
+        2 + ("3" - 1)
+        => 4 (as a number, not as a string)
+
+If you're not sure about the type of a variable, cast it.
+
+### `String()` casts to a string:
+
+        let n = 5;
+        String(n)
+        => "5"
+
+        let n = 5.4;
+        String(n)
+        => "5.4"
+
+        let n = "cat";
+        String(n)
+        => "cat"
+
+### `parseInt()` casts to an integer:
+
+        let s = "5.4";
+        parseInt( s )
+        => 5
+        
+        let s = 5.4;
+        parseInt( s )
+        => 5
+        
+        let s = 5;
+        parseInt( s )
+        => 5
+
+### `parseFloat()` casts to a float:
+
+        let s = "5.4";
+        parseFloat( s )
+        => 5.4
+        
+        let s = 5.4;
+        parseFloat( s )
+        => 5.4
+        
+        let s = 5;
+        parseFloat( s )
+        => 5
+
+
+## <a name="debugging"></a>Debugging
+
+You can output a value to the debugging console via
+
+        console.log( "A message here." );
+        
+        // Appears in yellow:
+        console.warn( "Something bad happened." );
+        // Appears in red:
+        console.error( "Something bad happened." );
+
+The `console.log/warn/error` functions can take multiple parameters. The output will display each parameter separate by a space. (This is like a Python `print` statement.)
+
+        let foo = true;
+        console.log( "foo:", foo );
+
+The `console.log/warn/error` functions can also behave somewhat like C `printf`, but with mostly different formatting parameters. (Note that there is no printf-like formatting function elsewhere in JavaScript.)
+
+        let passed = 13;
+        let total = 50;
+        console.log( "%d/%d tests passed", passed, total );
+
+Internet Explorer may throw a fit if you use any `console` functions without its developer tools open (F12).
+
+You can display a dialog box with
+
+        alert( "Hello!" );
+
+
+## <a name="math"></a>Math
+
+Basic math works out of the box. Division automatically converts to floating point as needed. (JavaScript pretends to have a unified `Number` type.)
+
+        3 + 4
+        => 7
+        
+        3*4
+        => 12
+        
+        3 - 4
+        => -1
+        
+        3/4
+        => 0.75
+        
+        14 % 10
+        => 4
+
+Use the `Math` module to access common mathematical functions.
+
+        Math.sqrt(2.25)
+        => 1.5
+        
+        Math.pow( 5, 2 )
+        => 25
+        
+        Math.sin( Math.PI/2 )
+        => 1
+        
+        Math.abs( -5 )
+        => 5
+        
+        Math.max( 10, 13 )
+        => 13
+        
+        Math.min( 10, 13 )
+        => 10
+        
+        Math.round( 1.1 )
+        => 1
+        
+        Math.random()
+        => a random number between 0 and 1
+        
+        Math.floor( 2.9 )
+        => 2
+        Math.floor( -2.9 )
+        => -3
+        
+        Math.ceil( 2.9 )
+        => 3
+        Math.ceil( -2.9 )
+        => -2
+        
+        // You can pass `Math.max()` and `Math.min()` any number of parameters.
+        Math.max( 10, 13, -1, 5, 100, -7 )
+        => 100
+        
+        // You can use an advanced JavaScript trick to get the `max` or `min` of an Array of numbers.
+        let myarray = [ 10, 13, -1, 5, 100, -7 ];
+        Math.max.apply( Math, myarray );
+        => 100
+
+This isn't exactly math, but you can get the current time in seconds as a floating point value
+
+        let now = (new Date().getTime())*.001;
+
+## <a name="strings"></a>Strings
+
+Length
+
+        'cat'.length
+        => 3
+
+Concatenation
+
+        'cat' + 'horse'
+        => 'cathorse'
+        
+        'cat'.concat( 'horse' )
+        => 'cathorse'
+
+        let mystring = 'cat';
+        mystring += 'horse';
+        => mystring is 'cathorse'
+
+Substring extraction with `.substr()` or `.substring()`
+        
+        // .substr() takes two arguments: the first is the offset, the second is the length of the sub-string.
+        'two words'.substr( 4,5 )
+        => 'words'
+        
+        // A negative offset to .substr() is interpreted as an offset from the end of the string.
+        'two words'.substr( -2,2 )
+        => 'ds'
+        
+        // .substring() takes two arguments: the first is the starting offset, the second is the up-to-but-not-including ending offset.
+        'two words'.substring( 4,5 )
+        => 'w'
+        
+        // A negative offset to .substring() isn't useful; it interprets them as zero.
+        'two words'.substring( -3,-1 )
+        => ''
+
+Find with `.indexOf()` or `.search()`
+
+        'two words'.indexOf( 'words' )
+        => 4
+        
+        'two words'.indexOf( 'zoo' )
+        => -1
+        
+        'two words'.search( 'words' )
+        => 4
+        
+        'two words'.search( 'zoo' )
+        => -1
+        
+        // .search(), unlike .indexOf(), can also take a regular expression.
+        'two words'.search( /wo[or]ds/ )
+        => 4
+
+Replace with `.replace()`
+
+        'cat dog cat moose cat fish turtle cat'.replace( 'cat', '13' )
+        => "13 dog cat moose cat fish turtle cat"
+        
+        // .replace() actually takes a regular expression as its first parameter, so it can be used to replace all occurrences:
+        'cat dog cat moose cat fish turtle cat'.replace( /cat/g, '13' )
+        => "13 dog 13 moose 13 fish turtle 13"
+
+Uppercase/lowercase with `.toUpperCase()`/`.toLowerCase()`
+
+        "This is great yogurt!".toUpperCase()
+        => "THIS IS GREAT YOGURT!"
+        
+        "NO MORE YOGURT?".toLowerCase()
+        => "no more yogurt?"
+
+Trim whitespace from both ends of a string with `.trim()`
+
+        "    \t why the spaces? \n".trim()
+        => "why the spaces?"
+
+Splitting or chopping up a string with `.split()`
+
+        'cat,dog,turtle'.split( ',' )
+        => [ "cat", "dog", "turtle" ]
+        
+        '123cat456cat789cat'.split( 'cat' )
+        => [ "123", "456", "789", "" ]
+        
+        // .split() actually takes a regular expression:
+        '123cat456dog789turtle'.split( /cat|dog|turtle/ )
+        => [ "123", "456", "789", "" ]
+
+Joining an array of strings together with `.join()`
+
+        [ "cat", "dog", "turtle" ].join( " and " )
+        => "cat and dog and turtle"
+        
+        // The default separator is comma ","
+        [ "cat", "dog", "turtle" ].join()
+        => "cat,dog,turtle"
+
+There is no built-in `printf` or similar function. Use `.replace()` or find a third-party library.
+
+You *can* format a number as a string with a desired number of decimal places with `.toFixed()`:
+
+        (5.345).toFixed()
+        => "5"
+
+        (5.345).toFixed(1)
+        => "5.3"
+
+        (5.346).toFixed(2)
+        => "5.35"
+
+        (5).toFixed(2)
+        => "5.00"
+
+        (-5).toFixed(2)
+        => "-5.00"
+
+        (1.23e2).toFixed(2)
+        => "123.00"
+
+        // It does not work on strings, since they don't have the method.
+        ("1.23e2").toFixed(2)
+        => ERROR
+        (parseFloat("1.23e2")).toFixed(2)
+        => "123.00"
+
+If you are using modern JavaScript (ECMAScript 6), you can enclose text in back-ticks to get a multi-line string:
+
+        let mystring = `A long string
+        that continues on multiple lines
+        and works great!`
+
+JavaScript (prior to ECMAScript 6) does not support multi-line strings, though putting a `\` character at the end of the line will trick you into thinking it does. This just escapes the actual newline, which some browsers preserve in the string and others don't. It will also mess up your line numbers when debugging. Not recommended. Use `+=` instead.
+
+        // Bad
+        var mystring = "A long string \
+        that continues on multiple lines \
+        but relies on undefined behavior, \
+        may or may not have actual newlines inside, \
+        and ruins debuggability."
+        
+        // Good
+        var mystring = "A long string ";
+        mystring += "that continues on multiple lines ";
+        mystring += "without relying on undefined behavior."
+
+## <a name="comparison"></a>Comparison
+
+Always use triple equals `===` (and its negation `!==`) for equality checking. They require that the types match, which catches mistakes and [avoids surprises](http://stackoverflow.com/a/359509/328840).
+
+        5 === 5
+        => true
+        
+        5.0 === 5
+        => true
+        
+        5 === 6
+        => false
+        
+        5 !== 5
+        => false
+        
+        "cat" === "cat"
+        => true
+
+        // Comparison is not "deep":
+        let a = [ 1, 2, 3 ];
+        a === a
+        => true
+        
+        [ 1, 2, 3 ] === [ 1, 2, 3 ]
+        => false
+
+The usual less than/greater than operators work.
+
+        1 < 3
+        => true
+        
+        -1 < -3
+        => false
+        
+        'a' < 'b'
+        => true
+        
+        'aa' < 'ab'
+        => true
+
+
+## <a name="arrays"></a>Arrays
+
+You can create an empty array in a few identical ways:
+
+        let myarray = []; // Use this one.
+        let myarray = Array();
+        let myarray = new Array();
+
+You can create populated arrays in a few identical ways:
+        
+        let myarray = [ 1, 2, 3, 'cat', 'fish' ]; // Use this one.
+        let myarray = Array( 1, 2, 3, 'cat', 'fish' );
+        let myarray = new Array( 1, 2, 3, 'cat', 'fish' );
+
+Use the one with brackets `[]`. (**Warning/Feature:** Beware of `Array`. `let a = Array( 1, 2 );` is the same as `let a = [ 1, 2 ];`, but `let a = Array(1);` is not the same as `let a = [1];`.
+When `Array` is called with one argument, and the argument is a positive integer,
+it creates an array of that length filled with `undefined`. This is a feature if you want to preallocate the array.)
+
+Arrays have a `.length` attribute:
+        
+        let myarray = [];
+        myarray.length
+        => 0
+        
+        let myarray = [ 1, 2, 3, 'cat', 'fish' ];
+        myarray.length
+        => 5
+
+You can iterate over the elements in an array. Arrays are zero-indexed.
+
+        let myarray = [ 1, 2, 3, 'cat', 'fish' ];
+        for( let i = 0; i < myarray.length; ++i )
+        {
+            console.log( myarray[i] );
+        }
+
+In modern JavaScript (ECMAScript 6), you can use `for...of` iteration:
+
+        let myarray = [ 1, 2, 3, 'cat', 'fish' ];
+        for( const animal of myarray ) {
+            console.log( animal );
+        }
+
+Clear an array by setting its `.length` to 0.
+
+        let myarray = [ 1, 2, 3, 'cat', 'fish' ];
+        myarray.length = 0;
+
+Preallocate space by increasing `.length`. The new entries will have the value `undefined`.
+
+        let myarray = [];
+        myarray.length = 100;
+        // This is equivalent:
+        let myarray = Array(100);
+
+Append a value to an array with `.push()`
+
+        let myarray = [ 'cat' ];
+        myarray.push( 'dog' );
+        => myarray is [ 'cat', 'dog' ]
+
+Remove and return the first element of an array with `.shift()`
+
+        let myarray = [ 1, 2, 3, 'cat', 'fish' ];
+        myarray.shift()
+        => 1
+        myarray is now [ 2, 3, 'cat', 'fish' ]
+
+Remove and return the last element of an array with `.pop()`
+
+        let myarray = [ 1, 2, 3, 'cat', 'fish' ];
+        myarray.pop()
+        => 'fish'
+        myarray is now [ 1, 2, 3, 'cat' ]
+
+Find an element in an array with `.indexOf()`
+
+        let myarray = [ 'cat', 77, -10, 0.5, 77, 'fish' ];
+        myarray.indexOf( 'cat' )
+        => 0
+        myarray.indexOf( 'fish' )
+        => 5
+        // .indexOf() returns -1 if the element is not found
+        myarray.indexOf( 'dog' )
+        => -1
+        // .indexOf() returns the index of the first identical element
+        myarray.indexOf( 77 )
+        => 1
+        // .indexOf() takes an optional second parameter, the index from which to start searching
+        myarray.indexOf( 77, 2 )
+        => 4
+        // .indexOf() uses === comparison, so strings and numbers are always different (rather than silently converted)
+        myarray.indexOf( '-10' )
+        => -1
+        myarray.indexOf( -10 )
+        => 2
+        // .lastIndexOf() is the same but searches from the end
+        myarray.lastIndexOf( 77 )
+        => 4
+        // .lastIndexOf() also takes an optional second parameter, the index from which to start searching
+        myarray.lastIndexOf( 77, 3 )
+        => 1
+        // .lastIndexOf()'s second index parameter can be negative, in which case it is added to .length
+        myarray.lastIndexOf( 'fish', -1 )
+        => 5
+        myarray.lastIndexOf( 'fish', -2 )
+        => -1
+
+Remove and return a range of elements from an array with `.splice()`
+
+        // .splice() takes two arguments: the first is the offset, the second is the number of elements to remove.
+        let myarray = [ 0, 1, 2, 3, 'cat', 'fish', 6, 7, 8, 9 ];
+        myarray.splice( 4, 5 )
+        => [ 'cat', 'fish', 6, 7, 8 ];
+        myarray is now [ 0, 1, 2, 3, 9 ]
+
+        // A negative offset to .splice() is interpreted as an offset from the end of the array.
+        let myarray = [ 0, 1, 2, 3, 'cat', 'fish', 6, 7, 8, 9 ];
+        myarray.splice( -6, 2 )
+        => [ 'cat', 'fish' ];
+        myarray is now [ 0, 1, 2, 3, 6, 7, 8, 9 ]
+
+You can use `.splice(0,1)` in place of `.shift()` and `.splice(-1,1)` in place of `.pop()`.
+
+Create a shallow copy of all or some of an array with `.slice()`
+
+        let myarray = [ 'cat', 'dog', 'bird', 'fire ferret' ];
+        let myarray2 = myarray.slice();
+        myarray2.pop();
+        => myarray2 is now [ 'cat', 'dog', 'bird' ], but myarray is still [ 'cat', 'dog', 'bird', 'fire ferret' ]
+        
+        // .slice() takes two arguments: the first is the starting offset (default `0`), the second is the up-to-but-not-including ending offset (default `.length`).
+        let myarray = [ 'cat', 'dog', 'bird', 'fire ferret' ];
+        myarray.slice( 0, 2 );
+        => [ 'cat', 'dog' ] (and myarray is unchanged)
+        
+        // A negative offset to .slice() is interpreted as an offset from the end of the string; either the start or end offset can be negative.
+        let myarray = [ 'cat', 'dog', 'bird', 'fire ferret', 'bear', 'sky bison' ];
+        myarray.slice( -1 )
+        => [ 'sky bison' ] (and myarray is unchanged)
+        myarray.slice( 2, -1 )
+        => [ 'bird', 'fire ferret', 'bear' ] (and myarray is unchanged)
+
+Concatenate two arrays with `.concat()`:
+
+        let myarray_first = [ 1, 2, 3 ];
+        let myarray_second = [ 'cat', 'fish' ];
+        // .concat() does not modify the existing arrays; it returns a new one.
+        myarray_first.concat( myarray_second )
+        => [1, 2, 3, "cat", "fish"]
+
+Reverse an array with `.reverse()`. It modifies the array in-place and also returns it.
+
+        let myarray = ["cat", "dog", "bird", "fire ferret"];
+        myarray.reverse();
+        => myarray is now ["fire ferret", "bird", "dog", "cat"]
+
+Sort an array with `.sort()`. It modifies the array in-place and also returns it. **Warning**: Elements are compared as strings, so numbers do not sort numerically.
+
+        let myarray = ["dog", "bird", "fire ferret", "cat"];
+        myarray.sort();
+        => myarray is now ["bird", "cat", "dog", "fire ferret"]
+        
+        // Numbers sort as if they were strings!
+        let myarray = [ 198, 3, 16, -4, 0 ];
+        myarray.sort();
+        => myarray is now [ -4, 0, 16, 198, 3 ]
+
+You can optionally pass a "comparison" function to sort which will be called with pairs of elements from the array.
+The comparison function should return a positive number if the first argument is larger, a negative number if the second argument is larger, and zero if they are the same.
+(Function syntax is described below.)
+
+        let myarray = [ 198, 3, 16, -4, 0 ];
+        // This is the way to sort numbers numerically:
+        myarray.sort( function( a, b ) { return a-b; } );
+        => myarray is now [ -4, 0, 3, 16, 198 ]
+        
+        let myarray = ["dog", "bird", "fire ferret", "cat"];
+        // This is the default behavior for strings:
+        myarray.sort( function( a, b ) {
+            if( a < b ) return -1;
+            if( a > b ) return 1;
+            return 0;
+            } );
+        => myarray is now ["bird", "cat", "dog", "fire ferret"]
+
+You can use this optional parameter to sort arrays of arrays or arrays of dictionaries.
+
+        let myarray = [ [ 7, "cat" ], [ -10, "fish" ], [ 900, "elephant" ], [ 0, "zebra" ] ];
+        myarray.sort( function( a, b ) { return a[0]-b[0]; } );
+        => [ [ -10, "fish" ], [ 0, "zebra" ], [ 7, "cat" ], [ 900, "elephant" ] ]
+        
+        let myarray = [ { size: 7, name: "cat" }, { size: 900, name: "elephant" }, { size: 3, name: "fish" }, { size: 15, name: "dog" } ];
+        myarray.sort( function( a, b ) { return a.size-b.size; } );
+        => [ { "size": 3, "name": "fish"}, { "size": 7, "name": "cat"}, { "size": 15, "name": "dog"}, { "size": 900, "name": "elephant"} ]
+
+There is no built-in way to compare two arrays. The equality operation `===` simply checks whether two arrays are aliases.
+
+To shuffle or randomize an array (correctly), see [this Stack Overflow question](http://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array-in-javascript).
+
+
+## <a name="dictionaries"></a>Dictionaries
+
+You can create a dictionary with curly braces `{}`. (In fact, we're creating a generic JavaScript `Object` and treating it like a bag of properties, which JavaScript allows.)
+
+        let mydict = {};
+        let mydict = { 'cat': 1, 'dog': 'kibble', 10: 'ten' };
+        // You can leave the quotes off of keys:
+        let mydict = { cat: 1, dog: 'kibble', 10: 'ten' };
+
+Dictionary keys are always strings. JavaScript's automatic type conversion is what lets us think we're using numbers as keys.
+
+        let mydict = {'cat': 1, 'dog': 'kibble', 10: 'ten'};
+        mydict[10]
+        => 'ten'
+        mydict['10']
+        => 'ten'
+        mydict[10] === mydict['10']
+        => true
+
+You can look up a value in a dictionary either with brackets `[]` or with a dot:
+
+        let mydict = {'cat': 1, 'dog': 'kibble', 10: 'ten'};
+        mydict['dog']
+        => 'kibble'
+        mydict.dog
+        => 'kibble'
+        mydict['dog'] === mydict.dog
+        => true
+
+Dot notation is super-convenient, so long as the key is a valid JavaScript variable name.
+In the above example, we have to use bracket notation for the key `10`.
+
+        mydict[10]
+        => 'ten'
+        mydict.10
+        => ERROR
+
+Add keys to a dictionary with either bracket or dot notation.
+
+        let mydict = {'cat': 'mice', 'dog': 'kibble'};
+        mydict.bear = 'salmon';
+        mydict['sheep'] = 'grass';
+
+Remove a key from a dictionary with `delete`:
+
+        let mydict = {'cat': 'mice', 'dog': 'kibble'};
+        delete mydict['cat'];
+        => mydict is {'dog': 'kibble'};
+
+Check if a key is in a dictionary with `in`:
+
+        let mydict = {'cat': 'mice', 'dog': 'kibble'};
+        'cat' in mydict
+        => true
+        'bear' in mydict
+        => false
+
+Iterate over the keys in a dictionary. Dictionaries are not ordered.
+
+        let mydict = {'cat': 1, 'dog': 'kibble', 10: 'ten'};
+        for( const k in mydict )
+        {
+            console.log( k + ': ' + mydict[k] );
+        }
+
+Remember that a dictionary's keys are always strings.
+JavaScript automatically converted anything else you tried to use as a key to a string.
+This can bite you.
+
+        let mydict = { 1: 'one', 13: 'thirteen', 8: 'eight' };
+        let num = 13;
+        for( const k in mydict )
+        {
+            // This prints "11" "131" and "81" to the console, not necessarily in that order.
+            console.log( k + 1 );
+            
+            // This will never be true.
+            if( k === num )
+            {
+                console.log( "We found", num );
+            }
+        }
+
+There is no convenient way to get the "length" or number of keys in a dictionary.
+You can manually count the number of keys.
+
+        let mydict = {'cat': 1, 'dog': 'kibble', 10: 'ten'};
+        let count = 0;
+        for( const k in mydict ) count += 1;
+        => count is 3
+
+
+## <a name="JSON"></a>JSON
+
+You can convert a JavaScript variable into a [JSON](http://en.wikipedia.org/wiki/JSON)
+string and back with `JSON.stringify()` and `JSON.parse()`
+
+        let myarray = [ 1, 2, 3, 'turtle', { cat: 'mouse', dog: 'cat', human: [ 'dog', 'cat' ] } ];
+        JSON.stringify( myarray )
+        => '[1,2,3,"turtle",{"cat":"mouse","dog":"cat","human":["dog","cat"]}]'
+        
+        let myarray = JSON.parse( '[1,2,3,"turtle",{"cat":"mouse","dog":"cat","human":["dog","cat"]}]' );
+        => myarray is [ 1, 2, 3, 'turtle', { cat: 'mouse', dog: 'cat', human: [ 'dog', 'cat' ] } ]
+
+
+## <a name="control"></a>Control flow
+
+`for` and `while` and `do`/`while` loops, `break` and `continue`,
+`if` and `else` and the ternary operator (`?:`), and `switch` statements
+all work exactly the same as they do in C/C++/Java.
+The important difference is that only functions create a new [scope](#scope).
+
+
+## <a name="functions"></a>Functions
+
+You define a function in JavaScript with the `function` keyword.
+
+        function print( x )
+        {
+            console.log( x );
+        }
+        print( "hello" );
+        => "hello" appears on the console.
+
+The function name is optional, which creates an unnamed or "anonymous" function
+
+        function( x )
+        {
+            console.log( x );
+        }
+
+This isn't useless, because you can assign functions to variables
+
+        let print = function( x )
+        {
+            console.log( x );
+        }
+        print( "hello" );
+        => "hello" appears on the console.
+
+or pass them as parameters to other functions
+
+        function repeat( func, N )
+        {
+            for( const i = 0; i < N; ++i )
+            {
+                func();
+            }
+        }
+        repeat( function() { console.log( "ha" ); }, 5 );
+        => "ha" appears five times on the console.
+
+You can declare anonymous functions in a very compact way by removing the word `function` and putting an arrow `=>` between the parameters and the body. You can also drop the parentheses and curly braces. These are called [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions).  For example, this is a function that adds its two parameters:
+
+        (a,b) => a+b
+
+This function squares its one parameter:
+
+        a => a*a
+
+Here is an example used as a callback function:
+
+        repeat( () => { console.log( "hey" ); }, 5 );
+
+The `return` statement works exactly the same as in C/C++/Java. If the function ends without reaching a `return` statement, or if the `return` statement doesn't return anything, the function "returns" `undefined`. **WARNING**: Because semicolons in JavaScript are "optional", if you put the value or expression you want to return on the following line(s), JavaScript will interpret the `return` statement as a complete statement and so return `undefined`; the value or expression on the following line(s) is unreachable code. For example:
+
+        // This function is broken; it returns undefined.
+        function contains_broken( start, end, value )
+        {
+                return
+                        value >= start &&
+                        value <= end
+                        ;
+        }
+        // This function works.
+        function contains_fixed( start, end, value )
+        {
+                return(
+                        value >= start &&
+                        value <= end
+                        );
+        }
+
+You can make parameters to your function optional by checking if they are undefined.
+
+        function say( what, repetitions )
+        {
+            if( undefined === repetitions )
+            {
+                repetitions = 1;
+            }
+            for( const i = 0; i < repetitions; ++i )
+            {
+                console.log( what );
+            }
+        }
+        say( "hello", 3 );
+        => "hello" appears three times on the console.
+        say( "nice to meet you" );
+        => "nice to meet you" appears once on the console.
+
+If a parameter is optional, then logically all following parameters must also be optional.
+[Some programming languages](http://python.org/) support named or keyword arguments,
+which allow any argument to be optional.
+You can implement this in JavaScript by writing your function to
+take a single parameter, a dictionary, which the function inspects.
+
+        function say( params )
+        {
+            let all_params = { "what": "default thing to say", "repetitions": 1 };
+            
+            for( const key in params )
+            {
+                all_params[key] = params[key];
+            }
+            
+            for( const i = 0; i < all_params.repetitions; ++i )
+            {
+                console.log( all_params.what );
+            }
+        }
+        say()
+        => "default thing to say" appears once on the console.
+        say({ "repetitions": 10 })
+        => "default thing to say" appears ten times on the console.
+        say({ "what": "moof" })
+        => "moof" appears once on the console.
+        say({ "what": "moof", "repetitions": 10 })
+        => "moof" appears ten times on the console.
+
+The parameters to a function are also passed via a magical Array-like `arguments` variable.
+
+        function anyargs()
+        {
+            console.log( "anyargs() called with " + arguments.length + " arguments." );
+            for( var i = 0; i < arguments.length; ++i )
+            {
+                console.log( arguments[i] );
+            }
+        }
+        anyargs( "the", "quick", "brown", "fox" );
+        => "anyargs() called with 4 arguments." appears on the console followed by each of the arguments.
+
+### <a name="scope"></a>Scope
+
+A variable declared within a function is visible within the function and not outside.
+This is the only scope boundary in old-style JavaScript variables declared with the `var` keyword.
+In modern JavaScript (ECMAScript 6), variables declared using `let` and `const` behave like
+in C++/Java, where curly braces define additional scopes and the variables
+you use in your `for` loops are also considered part of an additional scope.
+
+        function myfunc()
+        {
+            let a = 'cat';
+            
+            {
+                var b = 'dog';
+                let c = 'fish';
+                const d = 'mouse';
+            }
+            
+            // This is not an error. This prints `dog` to the console.
+            console.log( b );
+            // This is an error. `c` is out of scope.
+            console.log( c );
+            // This is an error. `d` is out of scope.
+            console.log( d );
+            
+            for( const i = 0; i < 10; ++i ) {}
+            
+            // This is an error. `i` is out of scope.
+            console.log( i );
+            
+            for( var i = 0; i < 10; ++i ) {}
+            
+            // This is not an error. This prints '10' to the console.
+            console.log( i );
+            
+            if( true )
+            {
+                var e = 'zebra';
+                let f = 'lion';
+            }
+            
+            // This is not an error. This prints 'zebra' to the console.
+            console.log( e );
+            // This is an error. `f` is out of scope.
+            console.log( f );
+        }
+
+**Warning**: If you forget to put `var` in front of your variable name and you're not in
+["strict" mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode),
+the variable becomes a new global variable.
+You can request strict mode by putting `"use strict";`
+as the first statement in a JavaScript source file
+(to enable strict mode everywhere in the file) or as the first statement in a function
+(to enable strict mode within the function if it wasn't enable for the entire file).
+Strict mode is generally a good thing.
+
+
+### <a name="closures"></a>Closures
+
+You can declare a function inside of another function and return it. Any local variables remain accessible to the returned function.
+
+        function generate_print_every_N( N )
+        {
+            let counter = 0;
+            
+            function increment()
+            {
+                counter += 1;
+                if( counter % N == 0 )
+                {
+                    console.log( counter );
+                }
+            }
+            
+            return increment;
+        }
+        let printevery = generate_print_every_N( 10 );
+        for( const i = 0; i < 100; ++i )
+        {
+            printevery();
+        }
+        
+        => prints 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 to the console.
+
+<a name="closure-oop"></a>Returning a function that can still access local variables is an elegant way to achieve encapsulation.
+You can use this for simple object-oriented programming by returning
+a dictionary of functions and variables.
+(There is a slightly more efficient way to do this described below under "Inheritance", but it is harder to understand.)
+
+        function RunningAverage()
+        {
+            // This is the dictionary.
+            let obj = {};
+            
+            // Local variables are "private".
+            let sum = 0.;
+            
+            // Variables attached to the dictionary are "public".
+            obj.number_of_numbers = 0;
+            
+            // Functions attached to the dictionary are "methods".
+            obj.another_number = function( num )
+            {
+                sum += num;
+                obj.number_of_numbers += 1;
+            }
+            
+            obj.current_average = function()
+            {
+                return sum / obj.number_of_numbers;
+            }
+            
+            return obj;
+        }
+        
+        let avg = RunningAverage();
+        for( const i = -2; i <= 2; ++i )
+        {
+            avg.another_number( i );
+            console.log( avg.current_average() );
+        }
+        => prints -2, -1.5, -1, -0.5, 0
+        console.log( avg.number_of_numbers );
+        => prints 5 to the console
+        console.log( avg.sum );
+        => avg.sum is undefined
+
+<a name="module"></a>The "module" pattern in JavaScript does exactly this with an immediately-called anonymous function,
+so that only one instance of the module can ever exist.
+The extra parentheses declare and immediately call the anonymous function.
+
+        let Conversions = (function(){
+            
+            const CM_PER_IN = 2.54;
+            const G_PER_LB = 453.592;
+            
+            function inches2cm( inches ) { return inches * CM_PER_IN; }
+            function cm2inches( cm ) { return cm / CM_PER_IN; }
+            function pounds2grams( pounds ) { return pounds * G_PER_LB; }
+            function grams2pounts( grams ) { return grams / G_PER_LB; }
+            
+            let module = {};
+            module.inches2cm = inches2cm;
+            module.cm2inches = cm2inches;
+            module.pounds2grams = pounds2grams;
+            module.grams2pounts = grams2pounts;
+            return module;
+            })();
+
+**Warning**: With `var`, inner functions share references to local variables of the outer function (like Python).
+This leads to the following common mistake:
+
+        function remember_positions()
+        {
+            var result = [];
+            for( var i = 0; i < 4; ++i )
+            {
+                result.push( function() { console.log( i ); } );
+            }
+            return result;
+        }
+        var funcs = remember_positions();
+        for( var i = 0; i < funcs.length; ++i )
+        {
+            funcs[i]();
+        }
+        => prints 4 4 4 4
+
+The solution is to use `let` or `const` ([ECMAScript 6](http://es6-features.org/#BlockScopedVariables)) or, if you must target older JavaScript, create an additional local scope that preserves the value of `i` at the time of creation.
+
+        function remember_positions()
+        {
+            var result = [];
+            for( var i = 0; i < 4; ++i )
+            {
+                result.push( function( index ) { return function() { console.log( index ); } }(i) );
+            }
+            return result;
+        }
+        var funcs = remember_positions();
+        for( var i = 0; i < funcs.length; ++i )
+        {
+            funcs[i]();
+        }
+        => prints 0 1 2 3
+
+## <a name="inheritance"></a>Inheritance
+
+In addition to the data-and-method encapsulation or module patterns [just described](#closures),
+modern JavaScript (ECMAScript 6) has full support for classes and object-oriented programming.
+See [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) for a guide.
+
+People used to simulate object-oriented programming in previous versions of JavaScript.
+The setup is much harder to understand than [closures](#closures), so you will commonly see closures
+used instead. If you want to know how to simulate object-oriented programming in pre-ES6 JavaScript, read on.
+
+Three things enable JavaScript's simulation of object-oriented programming with inheritance.
+First, functions are actually a kind of JavaScript Object.
+Since the "dictionaries" described above are just generic JavaScript Objects,
+this means that, in addition to calling a function, you can also 
+perform any of the dictionary operations on it, like adding extra key-value properties.
+
+        let myfunc = function() { console.log( "hello" ); }
+        myfunc.animal = 'cat';
+
+Second, functions have a secret `this` parameter.
+<a name="simple-oop"></a>If you call a function
+[the right way](http://yehudakatz.com/2011/08/11/understanding-javascript-function-invocation-and-this/),
+either with the `new` keyword or using
+dot-notation, JavaScript will set the `this` parameter for you to exactly what
+you want for object-oriented programming:
+
+        function Animal( number_of_legs )
+        {
+            this.number_of_legs = number_of_legs;
+            this.walking = false;
+            
+            this.start_walking = function() { this.walking = true; };
+            this.stop_walking = function() { this.walking = false; };
+        }
+        // 'new' creates a new object, sets the 'this' parameter to it when calling the function, and then returns the new object.
+        let octopus = new Animal( 8 );
+        // dot notation sets the 'this' parameter to the object to the left of the dot.
+        octopus.start_walking();
+        => octopus.walking is true
+        octopus.stop_walking();
+        => octopus.walking is false
+
+This is a lot like our closures from above. We can be more efficient.
+While we want every instance of `Animal` to have their own "instance" variables `number_of_legs` and `walking`,
+all instances can share the functions.
+The third piece to the puzzle, that enables sharing as well as inheritance,
+is that if an object doesn't have a property (read: if a dictionary doesn't contain a key),
+JavaScript checks if the object's special, internal property named `[[prototype]]`
+has the property, which may check if its `[[prototype]]` has the property, and so on.
+This simple mechanism may remind you of an inheritance hierarchy, similar to the way
+Java checks the superclass of an object.
+It is the mechanism by which you can simulate inheritance in JavaScript.
+When you `new` a function, JavaScript sets the new object's `[[prototype]]` to the function's `.prototype` property.
+(Every function comes with an empty `.prototype` property.)
+Putting it all together, you can define a (base) Class as follows:
+
+        function Animal( number_of_legs )
+        {
+            this.number_of_legs = number_of_legs;
+            this.walking = false;
+        }
+        Animal.prototype.start_walking = function() { this.walking = true; };
+        Animal.prototype.stop_walking = function() { this.walking = false; };
+
+You can use it the same way as before:
+
+        let octopus = new Animal( 8 );
+        octopus.start_walking();
+        => octopus.walking is true
+        octopus.stop_walking();
+        => octopus.walking is false
+
+You can specialize or subclass `Animal`
+
+        function Quadruped()
+        {
+            // Call the superclass constructor on the Quadruped instance's 'this'
+            // so that it creates a fresh copy of all superclass instance variables
+            // directly in the Quadruped instance.
+            // Use .call() to set the superclass constructor's 'this' variable.
+            // This is kind of like placement new in C++.
+            Animal.call( this, 4 );
+            
+            this.furry = true;
+        }
+        // Set the prototype of Quadruped to Animal's prototype.
+        // (It must be a copy of Animal's prototype, because you will add
+        // your Quadruped methods to it.)
+        // If a property isn't found in a Quadruped instance,
+        // JavaScript will look to this Animal instance; that's the inheritance.
+        // Rather than calling "new Animal()" to get the copy, use Object.create()
+        // to avoid unnecessarily executing Animal's constructor.
+        Quadruped.prototype = Object.create( Animal.prototype );
+        // Setting the prototype breaks the .constructor property of Quadruped
+        // instances, but you can fix that:
+        Quadruped.prototype.constructor = Quadruped;
+        // Now you can define Quadruped's methods.
+        Quadruped.prototype.haircut = function() { this.furry = false; };
+        Quadruped.prototype.hairgrow = function() { this.furry = true; };
+
+and then use it
+
+        let dog = new Quadruped();
+        dog.haircut();
+        => dog.furry is false
+        dog.start_walking();
+        => dog.walking is true
+        dog.hairgrow();
+        => dog.furry is true
+        dog.stop_walking();
+        => dog.walking is false
+
+*Note*: Some people implement inheritance without using JavaScript's
+built-in prototype chain. It's less memory-efficient (and JavaScript's `instanceof`
+won't know about the inheritance hierarchy),
+but probably easier to wrap your head around.
+To "subclass", you create a subclass constructor function whose first step is to create an
+instance of the superclass and then simply copy all of its properties to `this`.
+
+
+        function Animal( number_of_legs )
+        {
+            this.number_of_legs = number_of_legs;
+            this.walking = false;
+            
+            this.start_walking = function() { this.walking = true; };
+            this.stop_walking = function() { this.walking = false; };
+        }
+        
+        function Quadruped()
+        {
+            // Create an instance of the superclass Animal,
+            // and copy its properties.
+            let parent = new Animal( 4 );
+            for( const prop in parent ) this[prop] = parent[prop];
+            
+            
+            // Now create the variable and methods of the subclass.
+            this.furry = true;
+            
+            this.haircut = function() { this.furry = false; };
+            this.hairgrow = function() { this.furry = true; };
+        }
+        
+        let dog = new Quadruped();
+        dog.haircut();
+        => dog.furry is false
+        dog.start_walking();
+        => dog.walking is true
+        dog.hairgrow();
+        => dog.furry is true
+        dog.stop_walking();
+        => dog.walking is false

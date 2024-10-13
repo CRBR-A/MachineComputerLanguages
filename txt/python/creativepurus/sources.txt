@@ -1,5 +1,0 @@
-author: Anand Purushottam "creativepurus"
-url: https://github.com/creativepurus/Python-Basics
-url: https://github.com/creativepurus/Python-Advanced
-url: https://github.com/creativepurus/Python.Quiz.Questions
-license: the Creative Commons Zero v1.0 Universal License.

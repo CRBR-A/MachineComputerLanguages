@@ -1,0 +1,74 @@
+
+[A Whirlwind Tour of Python](/WhirlwindTourOfPython/ "Home")
+
+  - [About](/pages/about.html "About")
+  - [Archive](/archives.html "Archive")
+
+# A Whirlwind Tour of Python
+
+*Jake VanderPlas*
+
+![](/WhirlwindTourOfPython/figures/cover-large.gif)
+
+This website contains the full text of my free O'Reilly report, [*A
+Whirlwind Tour of
+Python*](http://www.oreilly.com/programming/free/a-whirlwind-tour-of-python.csp).
+
+*A Whirlwind Tour of Python* is a fast-paced introduction to essential
+features of the Python language, aimed at researchers and developers who
+are already familiar with programming in another language. The material
+is particularly designed for those who wish to use Python for data
+science and/or scientific programming, and in this capacity serves as an
+introduction to my longer book, [*The Python Data Science
+Handbook*](http://jakevdp.github.io/PythonDataScienceHandbook).
+
+The content is also available [on
+Github](https://github.com/jakevdp/WhirlwindTourOfPython) in the form of
+Jupyter Notebooks, or from O'Reilly site as a [free
+e-book](http://www.oreilly.com/programming/free/a-whirlwind-tour-of-python.csp)
+or [free
+pdf](http://www.oreilly.com/programming/free/files/a-whirlwind-tour-of-python.pdf).
+
+This material is released under the "No Rights Reserved" [CC0
+license](https://creativecommons.org/share-your-work/public-domain/cc0/),
+and thus you are free to re-use, modify, build-on, and enhance this
+material for any purpose.
+
+## Index[¶](#Index)
+
+1.  [Introduction](00-introduction.html)
+2.  [How to Run Python Code](01-how-to-run-python-code.html)
+3.  [Basic Python Syntax](02-basic-python-syntax.html)
+4.  [Python Semantics: Variables](03-semantics-variables.html)
+5.  [Python Semantics: Operators](04-semantics-operators.html)
+6.  [Built-In Scalar Types](05-built-in-scalar-types.html)
+7.  [Built-In Data Structures](06-built-in-data-structures.html)
+8.  [Control Flow Statements](07-control-flow-statements.html)
+9.  [Defining Functions](08-defining-functions.html)
+10. [Errors and Exceptions](09-errors-and-exceptions.html)
+11. [Iterators](10-iterators.html)
+12. [List Comprehensions](11-list-comprehensions.html)
+13. [Generators and Generator Expressions](12-generators.html)
+14. [Modules and Packages](13-modules-and-packages.html)
+15. [Strings and Regular
+    Expressions](14-strings-and-regular-expressions.html)
+16. [Preview of Data Science
+    Tools](15-preview-of-data-science-tools.html)
+17. [Resources for Further Learning](16-further-resources.html)
+18. [Appendix: Code To Reproduce Figures](17-figures.html)
+
+## License[¶](#License)
+
+This material is released under the "No Rights Reserved" [CC0](LICENSE)
+license, and thus you are free to re-use, modify, build-on, and enhance
+this material for any purpose.
+
+That said, I request (but do not require) that if you use or adapt this
+material, you include a proper attribution and/or citation; for example
+
+> *A Whirlwind Tour of Python* by Jake VanderPlas (O’Reilly). 
+> Copyright 2016 O’Reilly Media, Inc., 978-1-491-96465-1
+
+Read more about CC0
+[here](https://creativecommons.org/share-your-work/public-domain/cc0/).
+

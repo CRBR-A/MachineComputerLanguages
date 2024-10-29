@@ -1162,3 +1162,8 @@ instance of the superclass and then simply copy all of its properties to `this`.
         => dog.furry is true
         dog.stop_walking();
         => dog.walking is false
+
+---
+  url: https://gist.github.com/yig/8744917
+  license: CC0-1.0
+...

@@ -34,28 +34,6 @@ license](https://creativecommons.org/share-your-work/public-domain/cc0/),
 and thus you are free to re-use, modify, build-on, and enhance this
 material for any purpose.
 
-## Index[¶](#Index)
-
-1.  [Introduction](00-introduction.html)
-2.  [How to Run Python Code](01-how-to-run-python-code.html)
-3.  [Basic Python Syntax](02-basic-python-syntax.html)
-4.  [Python Semantics: Variables](03-semantics-variables.html)
-5.  [Python Semantics: Operators](04-semantics-operators.html)
-6.  [Built-In Scalar Types](05-built-in-scalar-types.html)
-7.  [Built-In Data Structures](06-built-in-data-structures.html)
-8.  [Control Flow Statements](07-control-flow-statements.html)
-9.  [Defining Functions](08-defining-functions.html)
-10. [Errors and Exceptions](09-errors-and-exceptions.html)
-11. [Iterators](10-iterators.html)
-12. [List Comprehensions](11-list-comprehensions.html)
-13. [Generators and Generator Expressions](12-generators.html)
-14. [Modules and Packages](13-modules-and-packages.html)
-15. [Strings and Regular
-    Expressions](14-strings-and-regular-expressions.html)
-16. [Preview of Data Science
-    Tools](15-preview-of-data-science-tools.html)
-17. [Resources for Further Learning](16-further-resources.html)
-18. [Appendix: Code To Reproduce Figures](17-figures.html)
 
 ## License[¶](#License)
 

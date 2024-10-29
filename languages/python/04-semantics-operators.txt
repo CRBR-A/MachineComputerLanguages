@@ -1,20 +1,3 @@
-
-[A Whirlwind Tour of Python](/WhirlwindTourOfPython/ "Home")
-
-  - [About](/pages/about.html "About")
-  - [Archive](/archives.html "Archive")
-
-![](/WhirlwindTourOfPython/figures/cover-small.jpg) *This notebook
-contains an excerpt from the [Whirlwind Tour of
-Python](http://www.oreilly.com/programming/free/a-whirlwind-tour-of-python.csp)
-by Jake VanderPlas; the content is available [on
-GitHub](https://github.com/jakevdp/WhirlwindTourOfPython).*
-
-*The text and code are released under the
-[CC0](https://github.com/jakevdp/WhirlwindTourOfPython/blob/master/LICENSE)
-license; see also the companion project, the [Python Data Science
-Handbook](https://github.com/jakevdp/PythonDataScienceHandbook).*
-
 # Basic Python Semantics: Operators
 
 \< [Basic Python Semantics: Variables and

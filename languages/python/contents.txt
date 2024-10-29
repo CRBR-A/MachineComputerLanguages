@@ -1,0 +1,23 @@
+## Index[¶](#Index)
+
+1.  [Introduction](00-introduction.txt)
+2.  [How to Run Python Code](01-how-to-run-python-code.txt)
+3.  [Basic Python Syntax](02-basic-python-syntax.txt)
+4.  [Python Semantics: Variables](03-semantics-variables.txt)
+5.  [Python Semantics: Operators](04-semantics-operators.txt)
+6.  [Built-In Scalar Types](05-built-in-scalar-types.txt)
+7.  [Built-In Data Structures](06-built-in-data-structures.txt)
+8.  [Control Flow Statements](07-control-flow-statements.txt)
+9.  [Defining Functions](08-defining-functions.txt)
+10. [Errors and Exceptions](09-errors-and-exceptions.txt)
+11. [Iterators](10-iterators.txt)
+12. [List Comprehensions](11-list-comprehensions.txt)
+13. [Generators and Generator Expressions](12-generators.txt)
+14. [Modules and Packages](13-modules-and-packages.txt)
+15. [Strings and Regular
+    Expressions](14-strings-and-regular-expressions.txt)
+16. [Preview of Data Science
+    Tools](15-preview-of-data-science-tools.txt)
+17. [Resources for Further Learning](16-further-resources.txt)
+18. [Appendix: Code To Reproduce Figures](17-figures.txt)
+

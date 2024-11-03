@@ -1,0 +1,15 @@
+author: Nils M Holm
+license: CC0
+source: https://www.t3x.org/subc/
+notes:
+  - note1: 
+    folder "s86" contains several useful tools for SubC ("public domain")
+  - note2:
+    last-update: 2022-01-27
+  - tested: 
+    - windows: 
+      status: OK (except the typedef "Experimental version")
+      modifications: 
+        file: winbuild.bat
+        lines: "MINGWPATH=c:\\mingw" and "%MINGWPATH%/lib/" 
+        to: reflect the current path where mingw is installed and libs

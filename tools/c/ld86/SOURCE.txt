@@ -1,0 +1,4 @@
+author: Robert Pengelly
+url: https://github.com/robertapengelly/ld86
+license:
+  short: Unlicense

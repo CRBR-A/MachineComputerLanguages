@@ -1,0 +1,4 @@
+author: Robert Pengelly
+url: https://github.com/robertapengelly/as86
+license:
+  short: Unlicense

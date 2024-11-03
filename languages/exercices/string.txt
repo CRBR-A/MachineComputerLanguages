@@ -1,0 +1,15 @@
+## Strings :
+1. palindrome checker: 
+  - input: a text
+  - output: "yes" if text is palindrome, else "no"
+2. anagram checker: 
+  - input: two words
+  - output: "yes" if the two words are anagrams, else "no".
+3. replace text: 
+  - input: a text
+  - output: the text, with all digits replaced by '?'
+4. regular expression library:
+
+A. basic text editor
+A. word processor program :
+  - include style (bold, italic), headers...

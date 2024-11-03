@@ -1,0 +1,16 @@
+Maths :
+1. average:
+  - input: 2 positive numbers
+  - output: the average of the numbers
+2. fizzbuzz: 
+  - input: a number
+  - output: "fizz" if input is divisible by 3, and "buzz" if divisible by 5
+3. Fibonacci sequence
+  
+A. basic calculator: 
+  - input: a basic mathematical expression (the 4 operation)
+  - output: the result of the mathematical expression
+B. scientific calculator: 
+C. spreadsheet
+  
+  

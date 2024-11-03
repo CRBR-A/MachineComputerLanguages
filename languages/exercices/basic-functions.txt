@@ -1,0 +1,12 @@
+# Exercises
+
+## Basic Input/output
+1. hello world: 
+  - output: show "hello world"
+2. counting: 
+  - output: show all numbers from 1 to 100
+3. random text: 
+  - output: a random text with digits and characters
+4. datetime:
+  - output: the current date and time
+  

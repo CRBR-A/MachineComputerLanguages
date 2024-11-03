@@ -1,0 +1,49 @@
+GAMES :
+1. guess a number: 
+  - computer choose a random number from 0 to 100
+  - input: a number between 0 and 100
+  - output : indicate if number is less, greater or equal to 
+  - repeat from input, until the number found
+2. Nim: 
+  - value=15 (matches)
+  - input: "1", "2" or "3"
+  - decrement the value with the input
+  `|||||||||||||||`.
+  
+3. rock, paper scissors: 
+  - input: "rock", "paper" OR "scissors"
+  - computer choose: "rock", "paper" or "scissors"
+  - output: 
+    - the computer choice
+    - the result (draw, beats or beaten) : 
+    +---------------+-----------------------------------------+
+    |               |            Computer choice              |
+    |               +-------------+-------------+-------------+
+    | Player choice |    rock     |    paper    |   scissors  |
+    +===============+=============+=============+=============+
+    | rock          | Draw        | Beaten by   | Beats       |
+    |               | 0           | computer +1 | player +1   |
+    +---------------+-------------+-------------+-------------+
+    | paper         | Beats       | Draw        | Beaten by   |
+    |               | player +1   | 0           | computer +1 |
+    +---------------+-------------+-------------+-------------+
+    | scissors      | Beaten by   | Beats       | Draw        |
+    |               | computer +1 | player +1   | 0           |
+    +---------------+-------------+-------------+-------------+
+    - the current score of the player and the computer
+  - repeat from input, until input is "quit" 
+
+5. Tic-tac-toe
+4. a minesweeper
+  
+draught
+
+13. sudoku solver (and generator): 
+
+
+
+4. game of life: 
+  - grid: N*N 
+
+chess
+  - 2 player (no AI)

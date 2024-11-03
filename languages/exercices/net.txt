@@ -1,0 +1,7 @@
+NET:
+1. a downloader:
+  - input: an url
+  - output: download the file in the url
+2. browser:
+  - output: show a webpage
+  - follow links, "history" function

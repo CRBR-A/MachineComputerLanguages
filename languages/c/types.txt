@@ -1,3 +1,4 @@
+# Integer and char
 | data type          | Bits | Min         | Max         | printf |
 | ------------------ | ---- | ----------- | ----------- | ------ |
 | char               | 8    |           0 |         255 | %c     |
@@ -13,11 +14,11 @@
 | long long          | 64   |  -9 * 10^18 |   9 * 10^18 | %lld   |
 | unsigned long long | 64   |           0 | 1.8 * 10^19 | %llu   |
 
-Floating point :
-| data type          | Bits | Min         | Max         | printf |
-| ------------------ | ---- | ----------- | ----------- | ------ |
-| float              | 32   |  -3 * 10^38 |   3 * 10^38 | `%f`   |
-| double             | 64   | -1 * 10^308 |      10^308 | `%lf`  |
+# Floating point
+| data type          | Bits | Min         | Max       | Decimal   | printf |
+| ------------------ | ---- | ----------- | --------- | --------- | ------ |
+| float              | 32   |  -3 * 10^38 | 3 * 10^38 |	6 digits  | %f     |
+| double             | 64   | -1 * 10^308 |    10^308 | 15 digits | %lf    |
 
 | T [N]              | array of `N` values of type `T` |
 | T *                | pointer, memory address         | `%p`    |
@@ -27,7 +28,7 @@ From <stdint.h>:
 (exact width)
 | data type    | Bits | Min         | Max        | printf     |
 | ------------ | ---- | ----------- | ---------- | ---------- |
-| uint8_t      | 8    |           0 |        255 | PRIu8      | 
+| uint8_t      | 8    |           0 |        255 | PRIu8      |
 | int8_t       | 8    |        -128 |        127 | PRId8      |
 | uint16_t     | 16   |           0 |      65535 | PRIu16     |
 | int16_t      | 16   |      -32768 |      32767 | PRId16     |

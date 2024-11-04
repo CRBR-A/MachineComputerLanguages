@@ -1,0 +1,57 @@
+```
+#include <stdio.h>
+
+int main(void)
+{
+  // code here
+  return 0;
+}
+```
+
+
+```
+if (CONDITION)
+{
+  // do something here
+}
+else // optional
+{
+  // do something else here
+}
+```
+
+**for loop** (repeat given number of times):
+
+```
+for (int i = 0; i < MAX; ++i)
+{
+  // do something here, you can use i
+}
+```
+
+**while loop** (repeat while CONDITION holds):
+
+```
+while (CONDITION)
+{
+  // do something here
+}
+```
+
+**do while loop** 
+
+```
+do
+{
+  // do something here
+} while (CONDITION);
+```
+
+**function definition**:
+
+```
+RETURN_TYPE myFunction (TYPE1 param1, TYPE2 param2, ...)
+{ // return type can be void
+  // do something here
+}
+```

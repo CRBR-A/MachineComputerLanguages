@@ -1,0 +1,2 @@
+url: https://github.com/erkkah/tinyargs
+license: Unlicense

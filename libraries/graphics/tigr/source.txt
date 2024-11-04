@@ -1,0 +1,8 @@
+source: https://github.com/erkkah/tigr
+author: Erik Agsjö
+license: Unlicense
+modification:
+  - rename: examples\demo\demo.cpp to examples\demo\demo.c
+  - in: examples\demo\demo.c, added: #include <stdbool.h>
+  - replace: in examples\demo\makefile: "g++" to "gcc"
+  - replace: in examples\demo\makefile: "demo.cpp" to "demo.c"

@@ -1,0 +1,3 @@
+source: https://github.com/r-lyeh/min
+author: r-lyeh
+license: Unlicense

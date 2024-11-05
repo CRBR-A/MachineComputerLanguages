@@ -1,2 +1,2 @@
-# ComputerLanguage
-Free "public domain" resources : the computer language (Programming).
+# Computer Programming
+Free "public domain" resources : Computer Programming.

@@ -1,0 +1,10 @@
+| data type | Description                     | printf |
+| --------- | ------------------------------- | ------ |
+| T [N]     | array of `N` values of type `T` |        |
+| T *       | pointer, memory address         | %p     |
+| struct    | structured data type            |        |
+
+
+---
+  license: CC0
+...

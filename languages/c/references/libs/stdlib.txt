@@ -1,0 +1,12 @@
+| symbol            | description                                         |
+| ----------------- | --------------------------------------------------- |
+| rand()            | Returns a pseudorandom number                       |
+| srand(n)          | Seeds the pseudorandom number generator             |
+| NULL              | Value assigned to pointers that point "nowhere"     |
+| malloc(size)      | Return pointer (or NULL) to an new allocated memory |
+| realloc(mem,size) | Return pointer (or NULL) to the resized memory      |
+| free(mem)         | Frees a dynamically allocated memory                |
+| atof(str)         | Converts string to floating point number            |
+| atoi(str)         | Converts string to integer number                   |
+| EXIT_SUCCESS      | Value the program should return on successful exit  |
+| EXIT_FAILURE      | Value the program should return on exit with error  |

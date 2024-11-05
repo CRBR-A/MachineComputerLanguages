@@ -1,0 +1,17 @@
+| symbol                | description                                         |
+| --------------------- | --------------------------------------------------- |
+| putchar(c)            | Writes a single character to output                 |
+| getchar()             | Returns a single character from input               |
+| puts(s)               | Writes string to output (with newline at the end)   |
+| printf(s,a,...)       | Write message, depending on format and variables    |
+| scanf(s,a,...)        | Reads all variables, depending on format            |
+| fopen(f,mode)         | Open a file, in specific mode, and returns pointer  |
+| fclose(f)             | Closes previously opened file                       |
+| fputc(c,f)            | Writes a single character to file                   |
+| fgetc(f)              | Returns a single character from file                |
+| fputs(s,f)            | Writes string to file (without newline at end).     |
+| fprintf(s,a,...)      | Like printf(), but outputs to a file                |
+| fscanf(f,s,a,...)     | Like scanf(), but reads from a file                 |
+| fread(dest,size,n,f)  | Reads n elems from file to dest, returns n or less  |
+| fwrite(dest,size,n,f) | Writes n elems from dest to file, returns n or less |
+| EOF                   | Value for "End of file"                             |

@@ -1,0 +1,8 @@
+| data type | Description              | printf     |
+| --------- | ------------------------ | ---------- |
+| char [N]  | string of `N` characters |            |
+| str *     | memory address of string | %p         |
+
+---
+  license: CC0
+...

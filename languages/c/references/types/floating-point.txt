@@ -1,0 +1,8 @@
+| data type | Bits | Min         | Max       | Decimal   | printf |
+| --------- | ---- | ----------- | --------- | --------- | ------ |
+| float     | 32   |  -3 * 10^38 | 3 * 10^38 |  6 digits | %f     |
+| double    | 64   | -1 * 10^308 |    10^308 | 15 digits | %lf    |
+
+---
+  license: CC0
+...

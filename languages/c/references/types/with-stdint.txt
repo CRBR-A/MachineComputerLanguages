@@ -1,0 +1,14 @@
+| data type    | Bits | Min         | Max        | printf     |
+| ------------ | ---- | ----------- | ---------- | ---------- |
+| uint8_t      | 8    |           0 |        255 | PRIu8      |
+| int8_t       | 8    |        -128 |        127 | PRId8      |
+| uint16_t     | 16   |           0 |      65535 | PRIu16     |
+| int16_t      | 16   |      -32768 |      32767 | PRId16     |
+| uint32_t     | 32   | -2147483648 | 2147483647 | PRIu32     |
+| int32_t      | 32   |           0 | 4294967295 | PRId32     |
+| int_least8_t | 8+   |        -128 |        127 | PRIdLEAST8 |
+| int_fast8_t  | 8+   |        -128 |        127 | PRIdFAST8  |
+
+---
+  license: CC0
+...

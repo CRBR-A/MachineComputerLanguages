@@ -1,0 +1,6 @@
+```C
+  while (CONDITION)
+  {
+    // do something here
+  }
+```

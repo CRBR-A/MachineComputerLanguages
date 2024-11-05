@@ -1,0 +1,6 @@
+```C
+  for (int i = 0; i < MAX; ++i)
+  {
+    // do something here, you can use i
+  }
+```

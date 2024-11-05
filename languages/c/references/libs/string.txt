@@ -1,0 +1,9 @@
+| symbol                | description                                          |
+| --------------------- | ---------------------------------------------------- |
+| memset(mem,val,size)  | Fills block of memory with val                       |
+| memcpy(dest,src,size) | Copies bytes from src to dest, returns dest          |
+| strcpy(dest,src)      | Copies string (zero terminated) to dest              |
+| strncpy(dest,src,n)   | Like strcpy(), but limited to n bytes                |
+| strcmp(s1,s2)         | Returns 0 if the two strings are equals              |
+| strlen(str)           | Returns length of given string                       |
+| strstr(str,substr)    | Returns pointer (or NULL) of substring in string     |

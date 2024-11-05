@@ -1,0 +1,6 @@
+| symbol         | description                                         |
+| -------------- | --------------------------------------------------- |
+| time(t)        | Set t as calendar time (timestamp), and returns it  |
+| time(NULL)     | Return the calendar time (timestamp)                |
+| clock()        | Returns approx. CPU cycle count since program start |
+| CLOCKS_PER_SEC | Number of CPU ticks per second                      |

@@ -1,0 +1,6 @@
+```C
+  RETURN_TYPE myFunction (TYPE1 param1, TYPE2 param2, ...)
+  { // return type can be void
+    // do something here
+  }
+```

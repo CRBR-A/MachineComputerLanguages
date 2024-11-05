@@ -1,0 +1,18 @@
+| symbol    | description                                    |
+| --------- | ---------------------------------------------- |
+| sin(x)    | Returns sine of angle, in RADIANS              |
+| cos(x)    | Returns cosine of angle, in RADIANS            |
+| tan(x)    | Returns tangent of angle, in RADIANS           |
+| asin(x)   | Returns arcus sine of angle, in RADIANS        |
+| ceil(x)   | Returns the round up value of floating point   |
+| floor(x)  | Returns the round down value of floating point |
+| fmod(a,b) | Returns floating point reminded after division |
+| isnan(x)  | Checks if given float value is NaN             |
+| NAN       | Value for "not a number"                       |
+| log(x)    | Returns natural logarithm (base e)             |
+| log10(x)  | Returns decadic logarithm (base 10)            |
+| log2(x)   | Returns binary logarithm (base 2)              |
+| exp(x)    | Returns exponential function (e^x)             |
+| sqrt(x)   | Returns floating point square root             |
+| pow(a,b)  | Power, raises *a* to *b* (in floating point)   |
+| abs(x)    | Returns absolute value                         |

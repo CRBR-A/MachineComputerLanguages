@@ -1,0 +1,10 @@
+```C
+  if (CONDITION)
+  {
+    // do something here
+  }
+  else 
+  {
+    // do something else here
+  }
+```

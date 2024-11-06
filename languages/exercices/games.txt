@@ -47,3 +47,8 @@ draught
 
 chess
   - 2 player (no AI)
+  
+  snake game
+  pong
+  
+  

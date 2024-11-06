@@ -1,7 +1,9 @@
 NET:
-1. a downloader:
+1. http(s) client (or "downloader"):
   - input: an url
   - output: download the file in the url
-2. browser:
+2. http(s) server
+  - activate web server
+3. HTML browser:
   - output: show a webpage
   - follow links, "history" function

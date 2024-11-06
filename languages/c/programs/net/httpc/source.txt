@@ -1,0 +1,5 @@
+Project: Embeddable HTTP(S) Client
+Author: Richard James Howe
+Email: mailto:howe.r.j.89@gmail.com
+License: The Unlicense
+Repository: https://github.com/howerj/httpc

@@ -1,0 +1,5 @@
+Title: A small diff utility
+Author: Richard James Howe
+License: 0BSD / Public Domain
+Email: mailto:howe.r.j.89@gmail.com
+Repo: https://github.com/howerj/diff

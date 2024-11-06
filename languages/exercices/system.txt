@@ -1,1 +1,9 @@
 1. file explorer
+
+
+
+
+9. simple Turing machine
+  manipulating a "virtual" memory, 
+  with simple command (single character)
+  

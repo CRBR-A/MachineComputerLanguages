@@ -7,3 +7,4 @@ NET:
 3. HTML browser:
   - output: show a webpage
   - follow links, "history" function
+4. "chatting"

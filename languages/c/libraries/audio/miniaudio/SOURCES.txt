@@ -1,0 +1,4 @@
+title: Audio playback and capture library, written in a single C file.
+url: https://github.com/mackron/miniaudio/
+author: David Reid "mackron"
+license: Unlicense / MIT No Attribution

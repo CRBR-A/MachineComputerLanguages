@@ -1,0 +1,4 @@
+title: Show any image in a terminal window.
+url: https://github.com/stolk/imcat
+author: Bram Stolk
+license: CC0 (imcat.c) + Unlicense/MIT (stb_image.h)

@@ -1,3 +1,0 @@
-author: GeekOnSkates
-license: Unlicense
-source: https://github.com/GeekOnSkates/howbigis

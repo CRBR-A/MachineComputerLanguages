@@ -4,14 +4,17 @@
 | hangman |
 | rock-paper-scissors |
 | tic-tac-toe |
-| text adventure (with an inventory) |
-| maze |
+| text adventure (with inventory) |
+| maze generator |
 | minesweeper |
+| sokoban |
+
 | chess (without/with AI) |
 | AI for chess  |
 | checkers (without/with AI)
 | snake |
 | pong |
+| breakout |
 | tetris |
 | game of life |
 | rogue-like |
